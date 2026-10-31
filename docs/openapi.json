@@ -1,0 +1,1226 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "IO Digital Broadcast API",
+    "version": "1.0.0",
+    "description": "Generated from route definitions in backend/src/routes. Response and request schemas are not yet fully specified; treat this as the route inventory. Errors use {error:{code,message}}."
+  },
+  "servers": [
+    {
+      "url": "{baseUrl}",
+      "variables": {
+        "baseUrl": {
+          "default": "https://broadcast.example.com",
+          "description": "Set to your deployed server URL"
+        }
+      }
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register a user (first user becomes ADMIN; later registration requires ADMIN)",
+        "operationId": "post_api_auth_register",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Sign in; returns access and refresh tokens",
+        "operationId": "post_api_auth_login",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "summary": "Rotate refresh token",
+        "operationId": "post_api_auth_refresh",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "summary": "Revoke refresh token",
+        "operationId": "post_api_auth_logout",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "summary": "Current user",
+        "operationId": "get_api_auth_me",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "List users (ADMIN)",
+        "operationId": "get_api_users",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/users/{id}": {
+      "patch": {
+        "summary": "Update user role or status (ADMIN)",
+        "operationId": "patch_api_users_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/channels": {
+      "get": {
+        "summary": "List channels",
+        "operationId": "get_api_channels",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create channel",
+        "operationId": "post_api_channels",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/channels/playlist.m3u": {
+      "get": {
+        "summary": "Export M3U (Authorization header or access_token query)",
+        "operationId": "get_api_channels_playlist_m3u",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/channels/{id}": {
+      "get": {
+        "summary": "Get channel",
+        "operationId": "get_api_channels_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update channel",
+        "operationId": "put_api_channels_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete channel",
+        "operationId": "delete_api_channels_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/channels/{id}/stream.m3u8": {
+      "get": {
+        "summary": "Redirect to signed HLS master playlist",
+        "operationId": "get_api_channels_id_stream_m3u8",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/me/favorites": {
+      "get": {
+        "summary": "List favourites",
+        "operationId": "get_api_me_favorites",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/me/favorites/{channelId}": {
+      "put": {
+        "summary": "Add favourite",
+        "operationId": "put_api_me_favorites_channelId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Remove favourite",
+        "operationId": "delete_api_me_favorites_channelId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/me/recent": {
+      "get": {
+        "summary": "Recently watched channels",
+        "operationId": "get_api_me_recent",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/me/recent/{channelId}": {
+      "post": {
+        "summary": "Record channel view",
+        "operationId": "post_api_me_recent_channelId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/playlists": {
+      "get": {
+        "summary": "List playlists",
+        "operationId": "get_api_playlists",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create playlist from URL or M3U content",
+        "operationId": "post_api_playlists",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/playlists/import": {
+      "post": {
+        "summary": "Import M3U file (multipart)",
+        "operationId": "post_api_playlists_import",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/playlists/{id}/refresh": {
+      "post": {
+        "summary": "Refresh playlist from source URL",
+        "operationId": "post_api_playlists_id_refresh",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/playlists/{id}": {
+      "put": {
+        "summary": "Update playlist",
+        "operationId": "put_api_playlists_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete playlist",
+        "operationId": "delete_api_playlists_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/playlists/{id}/channels": {
+      "get": {
+        "summary": "Channels in playlist",
+        "operationId": "get_api_playlists_id_channels",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/playlists/{id}/groups": {
+      "get": {
+        "summary": "Groups in playlist",
+        "operationId": "get_api_playlists_id_groups",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/epg/sources": {
+      "get": {
+        "summary": "List EPG sources",
+        "operationId": "get_api_epg_sources",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/epg/import": {
+      "post": {
+        "summary": "Import XMLTV from URL or content",
+        "operationId": "post_api_epg_import",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/epg": {
+      "get": {
+        "summary": "EPG programmes in a window",
+        "operationId": "get_api_epg",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/epg/channel/{id}": {
+      "get": {
+        "summary": "Current and next programme for a channel",
+        "operationId": "get_api_epg_channel_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/epg/now": {
+      "get": {
+        "summary": "Current programme per channel",
+        "operationId": "get_api_epg_now",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/streams": {
+      "get": {
+        "summary": "Stream states for all channels",
+        "operationId": "get_api_streams",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/streams/{id}/status": {
+      "get": {
+        "summary": "Stream status",
+        "operationId": "get_api_streams_id_status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/streams/{id}/start": {
+      "post": {
+        "summary": "Start stream (PRIMARY or BACKUP source)",
+        "operationId": "post_api_streams_id_start",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/streams/{id}/stop": {
+      "post": {
+        "summary": "Stop stream",
+        "operationId": "post_api_streams_id_stop",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/streams/{id}/restart": {
+      "post": {
+        "summary": "Restart stream",
+        "operationId": "post_api_streams_id_restart",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/graphics/templates": {
+      "get": {
+        "summary": "List CasparCG templates",
+        "operationId": "get_api_graphics_templates",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/graphics/status": {
+      "get": {
+        "summary": "CasparCG connection status",
+        "operationId": "get_api_graphics_status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/graphics/events": {
+      "get": {
+        "summary": "Graphics action log",
+        "operationId": "get_api_graphics_events",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/graphics/play": {
+      "post": {
+        "summary": "TAKE a template on a channel layer",
+        "operationId": "post_api_graphics_play",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/graphics/update": {
+      "post": {
+        "summary": "Update graphic data",
+        "operationId": "post_api_graphics_update",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/graphics/stop": {
+      "post": {
+        "summary": "Clear graphic layer",
+        "operationId": "post_api_graphics_stop",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/graphics/reconnect": {
+      "post": {
+        "summary": "Reconnect to CasparCG",
+        "operationId": "post_api_graphics_reconnect",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/recordings": {
+      "get": {
+        "summary": "List recordings",
+        "operationId": "get_api_recordings",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/recordings/storage": {
+      "get": {
+        "summary": "Recording storage usage",
+        "operationId": "get_api_recordings_storage",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/recordings/start": {
+      "post": {
+        "summary": "Start FFmpeg recording",
+        "operationId": "post_api_recordings_start",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/recordings/stop": {
+      "post": {
+        "summary": "Stop recording",
+        "operationId": "post_api_recordings_stop",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/recordings/{id}/download": {
+      "get": {
+        "summary": "Download recording file",
+        "operationId": "get_api_recordings_id_download",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/schedule": {
+      "get": {
+        "summary": "List schedules",
+        "operationId": "get_api_schedule",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create schedule",
+        "operationId": "post_api_schedule",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/schedule/runs": {
+      "get": {
+        "summary": "Schedule run history",
+        "operationId": "get_api_schedule_runs",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/schedule/{id}": {
+      "put": {
+        "summary": "Update schedule",
+        "operationId": "put_api_schedule_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete schedule",
+        "operationId": "delete_api_schedule_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/healthz": {
+      "get": {
+        "summary": "Liveness probe",
+        "operationId": "get_healthz",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/system/health": {
+      "get": {
+        "summary": "Component health (system:read)",
+        "operationId": "get_api_system_health",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/system/metrics": {
+      "get": {
+        "summary": "Runtime metrics (system:read)",
+        "operationId": "get_api_system_metrics",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/system/services": {
+      "get": {
+        "summary": "Service status (system:read)",
+        "operationId": "get_api_system_services",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/system/events": {
+      "get": {
+        "summary": "System event log (system:read)",
+        "operationId": "get_api_system_events",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/system/audit": {
+      "get": {
+        "summary": "Audit log (ADMIN)",
+        "operationId": "get_api_system_audit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/analytics/events": {
+      "post": {
+        "summary": "Record analytics event",
+        "operationId": "post_api_analytics_events",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/analytics/summary": {
+      "get": {
+        "summary": "Analytics summary (system:read)",
+        "operationId": "get_api_analytics_summary",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/hls/{slug}/{file}": {
+      "get": {
+        "summary": "HLS media; requires media token t= or a bearer token",
+        "operationId": "get_hls_slug_file",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "file",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

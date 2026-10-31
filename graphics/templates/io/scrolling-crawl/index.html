@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>IO scrolling-crawl</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#fff}
+.hidden{display:none}
+.abs{position:absolute}
+.fade{opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.on{opacity:1!important;transform:none!important}
+.lbl{font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.big{font-size:52px;font-weight:700;line-height:1.05}
+.mid{font-size:34px;font-weight:500}
+.cr{left:0;top:0;width:1920px;height:1080px;background:linear-gradient(#000,#0a1a33);overflow:hidden;perspective:600px}
+    .txt{position:absolute;left:160px;right:160px;bottom:-900px;font-size:58px;line-height:1.35;text-align:justify;transform-origin:50% 100%;transform:rotateX(25deg)}
+    .on .txt{animation:crawl 40s linear forwards}
+    @keyframes crawl{to{bottom:1400px}}</style></head>
+<body>
+<div id="root" class="abs cr fade"><div class="txt" id="text"></div></div>
+<script>
+// CasparCG HTML producer entry points.
+var root = document.getElementById('root');
+function play(){ root.classList.add('on'); }
+function stop(){ root.classList.remove('on'); }
+function next(){ }
+function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '' : String(v); }
+function update(str){
+  var d = {};
+  try { d = typeof str === 'string' ? JSON.parse(str) : (str || {}); } catch (e) { d = {}; }
+  setText('text', d.text||'');
+}
+
+</script></body></html>

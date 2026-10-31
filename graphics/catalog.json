@@ -1,0 +1,599 @@
+[
+  {
+    "slug": "lower-third-01",
+    "name": "Lower Third - Classic Bar",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-01/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-02",
+    "name": "Lower Third - Accent Band",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-02/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-03",
+    "name": "Lower Third - Right Aligned",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-03/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-04",
+    "name": "Lower Third - Minimal Line",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-04/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-05",
+    "name": "Lower Third - Pill",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-05/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-06",
+    "name": "Lower Third - Split Panel",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-06/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-07",
+    "name": "Lower Third - Glass",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-07/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-08",
+    "name": "Lower Third - Ticker Tab",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-08/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-09",
+    "name": "Lower Third - Corner Name",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-09/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "lower-third-10",
+    "name": "Lower Third - Dual Line Broadcast",
+    "category": "Lower Thirds",
+    "description": "Name and title caption",
+    "templatePath": "io/lower-third-10/index.html",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Name"
+      },
+      {
+        "key": "title",
+        "label": "Title / role"
+      }
+    ]
+  },
+  {
+    "slug": "breaking-news-01",
+    "name": "Breaking News - Red Banner",
+    "category": "Breaking News",
+    "description": "Breaking news banner",
+    "templatePath": "io/breaking-news-01/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label"
+      },
+      {
+        "key": "headline",
+        "label": "Headline"
+      },
+      {
+        "key": "subline",
+        "label": "Sub-line"
+      }
+    ]
+  },
+  {
+    "slug": "breaking-news-02",
+    "name": "Breaking News - Dark Flash",
+    "category": "Breaking News",
+    "description": "Breaking news banner",
+    "templatePath": "io/breaking-news-02/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label"
+      },
+      {
+        "key": "headline",
+        "label": "Headline"
+      },
+      {
+        "key": "subline",
+        "label": "Sub-line"
+      }
+    ]
+  },
+  {
+    "slug": "breaking-news-03",
+    "name": "Breaking News - Stacked",
+    "category": "Breaking News",
+    "description": "Breaking news banner",
+    "templatePath": "io/breaking-news-03/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label"
+      },
+      {
+        "key": "headline",
+        "label": "Headline"
+      },
+      {
+        "key": "subline",
+        "label": "Sub-line"
+      }
+    ]
+  },
+  {
+    "slug": "breaking-news-04",
+    "name": "Breaking News - Split Tag",
+    "category": "Breaking News",
+    "description": "Breaking news banner",
+    "templatePath": "io/breaking-news-04/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label"
+      },
+      {
+        "key": "headline",
+        "label": "Headline"
+      },
+      {
+        "key": "subline",
+        "label": "Sub-line"
+      }
+    ]
+  },
+  {
+    "slug": "breaking-news-05",
+    "name": "Breaking News - Full Width",
+    "category": "Breaking News",
+    "description": "Breaking news banner",
+    "templatePath": "io/breaking-news-05/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label"
+      },
+      {
+        "key": "headline",
+        "label": "Headline"
+      },
+      {
+        "key": "subline",
+        "label": "Sub-line"
+      }
+    ]
+  },
+  {
+    "slug": "news-ticker",
+    "name": "News Ticker",
+    "category": "Tickers",
+    "description": "Bottom ticker with label and scrolling headlines",
+    "templatePath": "io/news-ticker/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label"
+      },
+      {
+        "key": "text",
+        "label": "Headlines (separate with •)"
+      }
+    ]
+  },
+  {
+    "slug": "scrolling-crawl",
+    "name": "Scrolling Crawl",
+    "category": "Tickers",
+    "description": "Full-width scrolling text crawl",
+    "templatePath": "io/scrolling-crawl/index.html",
+    "fields": [
+      {
+        "key": "text",
+        "label": "Crawl text"
+      }
+    ]
+  },
+  {
+    "slug": "digital-clock",
+    "name": "Digital Clock",
+    "category": "Utility",
+    "description": "Live clock (uses the server-side render clock)",
+    "templatePath": "io/digital-clock/index.html",
+    "fields": [
+      {
+        "key": "label",
+        "label": "Label (optional)"
+      }
+    ]
+  },
+  {
+    "slug": "countdown-timer",
+    "name": "Countdown Timer",
+    "category": "Utility",
+    "description": "Counts down to a target ISO 8601 time",
+    "templatePath": "io/countdown-timer/index.html",
+    "fields": [
+      {
+        "key": "target",
+        "label": "Target (ISO 8601)"
+      },
+      {
+        "key": "label",
+        "label": "Label"
+      }
+    ]
+  },
+  {
+    "slug": "general-scoreboard",
+    "name": "General Scoreboard",
+    "category": "Scoreboards",
+    "description": "Two-team score bug",
+    "templatePath": "io/general-scoreboard/index.html",
+    "fields": [
+      {
+        "key": "home",
+        "label": "Home team"
+      },
+      {
+        "key": "homeScore",
+        "label": "Home score"
+      },
+      {
+        "key": "away",
+        "label": "Away team"
+      },
+      {
+        "key": "awayScore",
+        "label": "Away score"
+      },
+      {
+        "key": "period",
+        "label": "Period / status"
+      }
+    ]
+  },
+  {
+    "slug": "football-scoreboard",
+    "name": "Football (American) Scoreboard",
+    "category": "Scoreboards",
+    "description": "Score, quarter and possession",
+    "templatePath": "io/football-scoreboard/index.html",
+    "fields": [
+      {
+        "key": "home",
+        "label": "Home"
+      },
+      {
+        "key": "homeScore",
+        "label": "Home pts"
+      },
+      {
+        "key": "away",
+        "label": "Away"
+      },
+      {
+        "key": "awayScore",
+        "label": "Away pts"
+      },
+      {
+        "key": "period",
+        "label": "Quarter / clock"
+      },
+      {
+        "key": "possession",
+        "label": "Possession (home|away)"
+      }
+    ]
+  },
+  {
+    "slug": "basketball-scoreboard",
+    "name": "Basketball Scoreboard",
+    "category": "Scoreboards",
+    "description": "Score, quarter and fouls",
+    "templatePath": "io/basketball-scoreboard/index.html",
+    "fields": [
+      {
+        "key": "home",
+        "label": "Home"
+      },
+      {
+        "key": "homeScore",
+        "label": "Home pts"
+      },
+      {
+        "key": "homeFouls",
+        "label": "Home fouls"
+      },
+      {
+        "key": "away",
+        "label": "Away"
+      },
+      {
+        "key": "awayScore",
+        "label": "Away pts"
+      },
+      {
+        "key": "awayFouls",
+        "label": "Away fouls"
+      },
+      {
+        "key": "period",
+        "label": "Quarter"
+      }
+    ]
+  },
+  {
+    "slug": "soccer-scoreboard",
+    "name": "Soccer Scoreboard",
+    "category": "Scoreboards",
+    "description": "Score, match minute and scorers",
+    "templatePath": "io/soccer-scoreboard/index.html",
+    "fields": [
+      {
+        "key": "home",
+        "label": "Home"
+      },
+      {
+        "key": "homeScore",
+        "label": "Home goals"
+      },
+      {
+        "key": "away",
+        "label": "Away"
+      },
+      {
+        "key": "awayScore",
+        "label": "Away goals"
+      },
+      {
+        "key": "minute",
+        "label": "Minute (e.g. 67')"
+      },
+      {
+        "key": "scorers",
+        "label": "Scorers (optional)"
+      }
+    ]
+  },
+  {
+    "slug": "weather-panel",
+    "name": "Weather Panel",
+    "category": "Weather",
+    "description": "City, temperature and condition",
+    "templatePath": "io/weather-panel/index.html",
+    "fields": [
+      {
+        "key": "city",
+        "label": "City"
+      },
+      {
+        "key": "temp",
+        "label": "Temperature (e.g. 18°C)"
+      },
+      {
+        "key": "condition",
+        "label": "Condition"
+      },
+      {
+        "key": "detail",
+        "label": "Detail (wind, humidity)"
+      }
+    ]
+  },
+  {
+    "slug": "election-results",
+    "name": "Election Results",
+    "category": "Elections",
+    "description": "Up to four candidates with live vote shares",
+    "templatePath": "io/election-results/index.html",
+    "fields": [
+      {
+        "key": "race",
+        "label": "Race title"
+      },
+      {
+        "key": "reporting",
+        "label": "Reporting (e.g. 62% counted)"
+      },
+      {
+        "key": "c1",
+        "label": "Candidate 1 (name|party|pct|color)"
+      },
+      {
+        "key": "c2",
+        "label": "Candidate 2"
+      },
+      {
+        "key": "c3",
+        "label": "Candidate 3 (optional)"
+      },
+      {
+        "key": "c4",
+        "label": "Candidate 4 (optional)"
+      }
+    ]
+  },
+  {
+    "slug": "logo-animation",
+    "name": "Logo Animation",
+    "category": "Branding",
+    "description": "Animated logo reveal with wordmark",
+    "templatePath": "io/logo-animation/index.html",
+    "fields": [
+      {
+        "key": "wordmark",
+        "label": "Wordmark"
+      },
+      {
+        "key": "tagline",
+        "label": "Tagline"
+      },
+      {
+        "key": "logoUrl",
+        "label": "Logo image URL (optional)"
+      }
+    ]
+  },
+  {
+    "slug": "program-introduction",
+    "name": "Program Introduction",
+    "category": "Programs",
+    "description": "Opening card with show title and presenter",
+    "templatePath": "io/program-introduction/index.html",
+    "fields": [
+      {
+        "key": "title",
+        "label": "Show title"
+      },
+      {
+        "key": "subtitle",
+        "label": "Subtitle / episode"
+      },
+      {
+        "key": "presenter",
+        "label": "Presenter"
+      }
+    ]
+  },
+  {
+    "slug": "program-transition",
+    "name": "Program Transition",
+    "category": "Programs",
+    "description": "Full-screen wipe transition card with next program title",
+    "templatePath": "io/program-transition/index.html",
+    "fields": [
+      {
+        "key": "upNext",
+        "label": "Up next label"
+      },
+      {
+        "key": "title",
+        "label": "Next program"
+      }
+    ]
+  },
+  {
+    "slug": "end-credits",
+    "name": "End Credits",
+    "category": "Programs",
+    "description": "Scrolling credits from newline-separated lines",
+    "templatePath": "io/end-credits/index.html",
+    "fields": [
+      {
+        "key": "lines",
+        "label": "Credit lines (separate with |)"
+      }
+    ]
+  }
+]

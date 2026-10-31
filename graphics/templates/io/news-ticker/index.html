@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>IO news-ticker</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#fff}
+.hidden{display:none}
+.abs{position:absolute}
+.fade{opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.on{opacity:1!important;transform:none!important}
+.lbl{font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.big{font-size:52px;font-weight:700;line-height:1.05}
+.mid{font-size:34px;font-weight:500}
+.tk{left:0;bottom:0;width:1920px;height:96px;background:rgba(5,5,5,.95);border-top:3px solid #fff;display:flex;align-items:center;overflow:hidden}
+    .lab{background:#fff;color:#000;font-weight:900;font-size:34px;padding:0 40px;height:100%;display:flex;align-items:center}
+    .scroll{white-space:nowrap;font-size:40px;padding-left:40px;animation:scroll 22s linear infinite}
+    @keyframes scroll{from{transform:translateX(1920px)}to{transform:translateX(-100%)}}</style></head>
+<body>
+<div id="root" class="abs tk fade"><div class="lab" id="label"></div><div class="scroll" id="text"></div></div>
+<script>
+// CasparCG HTML producer entry points.
+var root = document.getElementById('root');
+function play(){ root.classList.add('on'); }
+function stop(){ root.classList.remove('on'); }
+function next(){ }
+function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '' : String(v); }
+function update(str){
+  var d = {};
+  try { d = typeof str === 'string' ? JSON.parse(str) : (str || {}); } catch (e) { d = {}; }
+  setText('label', d.label||'NEWS'); setText('text', d.text||'');
+}
+
+</script></body></html>

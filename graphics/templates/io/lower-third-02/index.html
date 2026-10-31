@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>IO lower-third-02</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#fff}
+.hidden{display:none}
+.abs{position:absolute}
+.fade{opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.on{opacity:1!important;transform:none!important}
+.lbl{font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.big{font-size:52px;font-weight:700;line-height:1.05}
+.mid{font-size:34px;font-weight:500}
+.bar{left:90px;bottom:120px;width:1100px;height:150px;background:linear-gradient(90deg,#c8102e,#1a1a1a);padding:22px 34px;box-sizing:border-box;transform:translateY(30px)}.fade{transform:translateY(20px)}.on{transform:none}</style></head>
+<body>
+<div id="root" class="abs bar fade"><div class="lbl" id="title"></div><div class="big" id="name"></div></div>
+<script>
+// CasparCG HTML producer entry points.
+var root = document.getElementById('root');
+function play(){ root.classList.add('on'); }
+function stop(){ root.classList.remove('on'); }
+function next(){ }
+function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '' : String(v); }
+function update(str){
+  var d = {};
+  try { d = typeof str === 'string' ? JSON.parse(str) : (str || {}); } catch (e) { d = {}; }
+  setText('name', d.name); setText('title', d.title);
+}
+</script></body></html>

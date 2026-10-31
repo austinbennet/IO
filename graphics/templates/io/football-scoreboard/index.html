@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>IO football-scoreboard</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#fff}
+.hidden{display:none}
+.abs{position:absolute}
+.fade{opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.on{opacity:1!important;transform:none!important}
+.lbl{font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.big{font-size:52px;font-weight:700;line-height:1.05}
+.mid{font-size:34px;font-weight:500}
+.sb{left:50%;top:50px;transform:translateX(-50%);background:linear-gradient(90deg,#0b3d91,#111);border-bottom:6px solid #ffb400;font-size:42px;font-weight:700;display:flex;align-items:stretch}
+    .t{padding:16px 30px;min-width:240px;display:flex;align-items:center;gap:14px}.s{font-size:58px;padding:12px 26px;min-width:90px;text-align:center}
+    .poss{width:14px;height:14px;background:#ffb400;border-radius:50%;opacity:0}.poss.on{opacity:1}.q{background:#000;padding:16px 28px;font-size:30px;display:flex;align-items:center;flex-direction:column;justify-content:center}</style></head>
+<body>
+<div id="root" class="abs sb fade"><div class="t"><span class="poss" id="ph"></span><span id="home"></span></div><div class="s" id="hs"></div><div class="q" id="period"></div><div class="s" id="as"></div><div class="t" style="justify-content:flex-end"><span id="away"></span><span class="poss" id="pa"></span></div></div>
+<script>
+// CasparCG HTML producer entry points.
+var root = document.getElementById('root');
+function play(){ root.classList.add('on'); }
+function stop(){ root.classList.remove('on'); }
+function next(){ }
+function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '' : String(v); }
+function update(str){
+  var d = {};
+  try { d = typeof str === 'string' ? JSON.parse(str) : (str || {}); } catch (e) { d = {}; }
+  setText('home', d.home); setText('hs', d.homeScore); setText('away', d.away); setText('as', d.awayScore); setText('period', d.period); document.getElementById('ph').className='poss'+(d.possession==='home'?' on':''); document.getElementById('pa').className='poss'+(d.possession==='away'?' on':'');
+}
+
+</script></body></html>

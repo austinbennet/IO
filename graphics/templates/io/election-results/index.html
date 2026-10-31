@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>IO election-results</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#fff}
+.hidden{display:none}
+.abs{position:absolute}
+.fade{opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.on{opacity:1!important;transform:none!important}
+.lbl{font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.big{font-size:52px;font-weight:700;line-height:1.05}
+.mid{font-size:34px;font-weight:500}
+.el{left:90px;bottom:120px;width:1100px;background:rgba(8,8,8,.92);padding:24px 30px;box-sizing:border-box;border-top:6px solid #fff}
+    .row{display:flex;align-items:center;gap:20px;font-size:32px;margin-top:12px}.bar{flex:1;height:26px;background:#222;position:relative}.fill{height:100%;position:absolute;left:0;top:0}
+    .pct{width:120px;text-align:right;font-weight:700}</style></head>
+<body>
+<div id="root" class="abs el fade"><div class="big" id="race"></div><div class="lbl" id="reporting"></div><div id="rows"></div></div>
+<script>
+// CasparCG HTML producer entry points.
+var root = document.getElementById('root');
+function play(){ root.classList.add('on'); }
+function stop(){ root.classList.remove('on'); }
+function next(){ }
+function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '' : String(v); }
+function update(str){
+  var d = {};
+  try { d = typeof str === 'string' ? JSON.parse(str) : (str || {}); } catch (e) { d = {}; }
+  setText('race', d.race); setText('reporting', d.reporting); var h=''; ['c1','c2','c3','c4'].forEach(function(k){ if(!d[k]) return; var p=String(d[k]).split('|'); var pct=Math.max(0,Math.min(100,Number(p[2])||0)); h+='<div class="row"><div style="width:360px">'+(p[0]||'')+' <span class="lbl">'+(p[1]||'')+'</span></div><div class="bar"><div class="fill" style="width:'+pct+'%;background:'+(p[3]||'#fff')+'"></div></div><div class="pct">'+pct.toFixed(1)+'%</div></div>'; }); document.getElementById('rows').innerHTML=h;
+}
+
+</script></body></html>

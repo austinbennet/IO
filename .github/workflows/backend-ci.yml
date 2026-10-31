@@ -1,0 +1,82 @@
+name: backend-ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: io
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: io
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U io" --health-interval 5s --health-timeout 5s --health-retries 20
+      redis:
+        image: redis:7
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      JWT_SECRET: ci-jwt-secret-0123456789abcdef0123456789
+      MEDIA_TOKEN_SECRET: ci-media-secret-0123456789abcdef0123456789
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg python3
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+      - name: Typecheck
+        working-directory: backend
+        run: npm run typecheck
+      - name: Unit tests
+        working-directory: backend
+        run: npm test
+      - name: Create runtime env
+        working-directory: backend
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/data"
+          cat > .env <<ENV
+          NODE_ENV=development
+          PORT=8080
+          HOST=127.0.0.1
+          IO_PUBLIC_BASE_URL=http://127.0.0.1:8080
+          IO_DATA_DIR=$GITHUB_WORKSPACE/data
+          DATABASE_URL=postgres://io:ci-only-password@127.0.0.1:5432/io
+          REDIS_URL=redis://127.0.0.1:6379
+          JWT_SECRET=$JWT_SECRET
+          MEDIA_TOKEN_SECRET=$MEDIA_TOKEN_SECRET
+          HLS_LADDER=360p:360:800:96,240p:240:400:64
+          X264_PRESET=ultrafast
+          HEALTH_INTERVAL_MS=30000
+          RECORDING_MIN_FREE_GB=1
+          MAX_CONCURRENT_STREAMS=2
+          ALLOW_PRIVATE_SOURCE_HOSTS=127.0.0.1
+          ENV
+      - name: Build and migrate
+        working-directory: backend
+        run: |
+          npm run build
+          npm run migrate
+      - name: Start backend
+        working-directory: backend
+        run: |
+          nohup node dist/server.js > "$RUNNER_TEMP/backend.log" 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:8080/healthz && exit 0; sleep 1; done
+          cat "$RUNNER_TEMP/backend.log"; exit 1
+      - name: API end-to-end suite
+        run: BASE=http://127.0.0.1:8080 bash tests/e2e-api.sh
+      - name: Backend log
+        if: always()
+        run: cat "$RUNNER_TEMP/backend.log" || true

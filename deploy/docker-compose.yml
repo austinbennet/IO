@@ -1,0 +1,86 @@
+# IO Digital Broadcast deployment. Only io-nginx publishes ports (80/443).
+# AMCP (5250), PostgreSQL, Redis and the API port stay on the internal network.
+name: io-broadcast
+
+x-backend-env: &backend-env
+  NODE_ENV: production
+  HOST: 0.0.0.0
+  PORT: "8080"
+  IO_PUBLIC_BASE_URL: ${PUBLIC_BASE_URL}
+  DATABASE_URL: postgres://io:${POSTGRES_PASSWORD}@io-postgres:5432/io
+  REDIS_URL: redis://:${REDIS_PASSWORD}@io-redis:6379
+  JWT_SECRET: ${JWT_SECRET}
+  MEDIA_TOKEN_SECRET: ${MEDIA_TOKEN_SECRET}
+  HLS_LADDER: ${HLS_LADDER}
+  MAX_CONCURRENT_STREAMS: ${MAX_CONCURRENT_STREAMS}
+  CASPARCG_ENABLED: ${CASPARCG_ENABLED:-false}
+  CASPARCG_HOST: io-casparcg
+  CASPARCG_AMCP_PORT: "5250"
+  SCHEDULER_ENABLED: "true"
+
+services:
+  io-postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: io
+      POSTGRES_USER: io
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U io -d io"]
+      interval: 5s
+      retries: 20
+
+  io-redis:
+    image: redis:7-alpine
+    # Password-protected, internal network only, never published.
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes: [redisdata:/data]
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 5s
+      retries: 20
+
+  # API + WebSocket + HLS + stream supervisor + scheduler + recorder + monitoring (one process).
+  io-api:
+    build: { context: .., dockerfile: backend/Dockerfile }
+    environment: *backend-env
+    depends_on:
+      io-postgres: { condition: service_healthy }
+      io-redis: { condition: service_healthy }
+    networks: [internal]
+    volumes: [hls:/data/hls, recordings:/data/recordings]
+    restart: unless-stopped
+
+  # Optional CasparCG Server. Not bundled: set CASPARCG_IMAGE to a supported image you built or licensed
+  # (see docs/casparcg.md) and enable with --profile casparcg and CASPARCG_ENABLED=true.
+  io-casparcg:
+    image: ${CASPARCG_IMAGE:-busybox:stable}
+    profiles: [casparcg]
+    command: ["sleep", "infinity"]
+    networks: [internal]
+    restart: unless-stopped
+
+  io-nginx:
+    image: nginx:1.27-alpine
+    ports: ["80:80"]   # add 443 with TLS certificates before exposing HTTPS
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on: [io-api]
+    networks: [internal, public]
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redisdata:
+  hls:
+  recordings:
+
+networks:
+  internal:
+    internal: true
+  public:

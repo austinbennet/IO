@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>IO digital-clock</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#fff}
+.hidden{display:none}
+.abs{position:absolute}
+.fade{opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.on{opacity:1!important;transform:none!important}
+.lbl{font-size:22px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.big{font-size:52px;font-weight:700;line-height:1.05}
+.mid{font-size:34px;font-weight:500}
+.clk{right:90px;top:70px;background:rgba(0,0,0,.8);padding:18px 30px;border:2px solid #fff}
+    .time{font-size:78px;font-weight:700;font-variant-numeric:tabular-nums}</style></head>
+<body>
+<div id="root" class="abs clk fade"><div class="lbl" id="label"></div><div class="time" id="time">00:00:00</div></div>
+<script>
+// CasparCG HTML producer entry points.
+var root = document.getElementById('root');
+function play(){ root.classList.add('on'); }
+function stop(){ root.classList.remove('on'); }
+function next(){ }
+function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '' : String(v); }
+function update(str){
+  var d = {};
+  try { d = typeof str === 'string' ? JSON.parse(str) : (str || {}); } catch (e) { d = {}; }
+  setText('label', d.label||''); tick();
+}
+function tick(){ var t=new Date(); var p=function(n){return (n<10?'0':'')+n}; setText('time', p(t.getHours())+':'+p(t.getMinutes())+':'+p(t.getSeconds())); }
+    setInterval(tick, 250);
+</script></body></html>
