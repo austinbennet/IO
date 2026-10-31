@@ -37,7 +37,6 @@ jobs:
       HEALTH_INTERVAL_MS: "30000"
       RECORDING_MIN_FREE_GB: "1"
       MAX_CONCURRENT_STREAMS: "2"
-      ALLOW_PRIVATE_SOURCE_HOSTS: 127.0.0.1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -65,11 +64,15 @@ jobs:
           npm run migrate
       - name: Start backend
         working-directory: backend
+        env:
+          ALLOW_PRIVATE_SOURCE_HOSTS: 127.0.0.1
         run: |
           nohup node dist/server.js > "$RUNNER_TEMP/backend.log" 2>&1 &
           for i in $(seq 1 60); do curl -sf http://127.0.0.1:8080/healthz && exit 0; sleep 1; done
           cat "$RUNNER_TEMP/backend.log"; exit 1
       - name: API end-to-end suite
+        env:
+          ALLOW_PRIVATE_SOURCE_HOSTS: 127.0.0.1
         run: BASE=http://127.0.0.1:8080 bash tests/e2e-api.sh
       - name: Backend log
         if: always()
