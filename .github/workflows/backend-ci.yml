@@ -23,8 +23,21 @@ jobs:
         options: >-
           --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 5s --health-retries 20
     env:
+      NODE_ENV: development
+      PORT: "8080"
+      HOST: 127.0.0.1
+      IO_PUBLIC_BASE_URL: http://127.0.0.1:8080
+      IO_DATA_DIR: ${{ github.workspace }}/data
+      DATABASE_URL: postgres://io:ci-only-password@127.0.0.1:5432/io
+      REDIS_URL: redis://127.0.0.1:6379
       JWT_SECRET: ci-jwt-secret-0123456789abcdef0123456789
       MEDIA_TOKEN_SECRET: ci-media-secret-0123456789abcdef0123456789
+      HLS_LADDER: 360p:360:800:96,240p:240:400:64
+      X264_PRESET: ultrafast
+      HEALTH_INTERVAL_MS: "30000"
+      RECORDING_MIN_FREE_GB: "1"
+      MAX_CONCURRENT_STREAMS: "2"
+      ALLOW_PRIVATE_SOURCE_HOSTS: 127.0.0.1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,27 +56,8 @@ jobs:
       - name: Unit tests
         working-directory: backend
         run: npm test
-      - name: Create runtime env
-        working-directory: backend
-        run: |
-          mkdir -p "$GITHUB_WORKSPACE/data"
-          cat > .env <<ENV
-          NODE_ENV=development
-          PORT=8080
-          HOST=127.0.0.1
-          IO_PUBLIC_BASE_URL=http://127.0.0.1:8080
-          IO_DATA_DIR=$GITHUB_WORKSPACE/data
-          DATABASE_URL=postgres://io:ci-only-password@127.0.0.1:5432/io
-          REDIS_URL=redis://127.0.0.1:6379
-          JWT_SECRET=$JWT_SECRET
-          MEDIA_TOKEN_SECRET=$MEDIA_TOKEN_SECRET
-          HLS_LADDER=360p:360:800:96,240p:240:400:64
-          X264_PRESET=ultrafast
-          HEALTH_INTERVAL_MS=30000
-          RECORDING_MIN_FREE_GB=1
-          MAX_CONCURRENT_STREAMS=2
-          ALLOW_PRIVATE_SOURCE_HOSTS=127.0.0.1
-          ENV
+      - name: Prepare data directory
+        run: mkdir -p "$GITHUB_WORKSPACE/data"
       - name: Build and migrate
         working-directory: backend
         run: |
